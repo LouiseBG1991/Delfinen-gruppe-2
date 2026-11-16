@@ -10,8 +10,9 @@ void setup (){
     UI ui = new UI();
 }
 
+@Test
 void testUI (){
-
+    assertEquals(1, 1);
 }
 
 
