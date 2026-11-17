@@ -22,6 +22,12 @@ public class Club {
         }
         return null;
     }
+
+    public void printMembers() {
+        for (Member member : members) {
+            IO.println(member);
+        }
+    }
 }
 
 
