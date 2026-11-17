@@ -1,8 +1,14 @@
 import java.time.LocalDate;
 
 public class UI {
-    public UI() {
+
+    private Club club;
+
+    public UI(Club club) {
+        this.club = club;
+
     }
+
 
     public void Run() {
         boolean isRunning = true;
@@ -44,7 +50,8 @@ public class UI {
                 case 0 -> trainerIsRunning = false;
                 case 1 -> IO.println("Du ser stævneresultater");
                 case 2 -> IO.println("Du ser svømmediscipliner");
-                default -> IO.println("Ugyldigt valg.");            }
+                default -> IO.println("Ugyldigt valg.");
+            }
         }
     }
 
@@ -58,7 +65,7 @@ public class UI {
         while (chairmanIsRunning) {
             int chairmanChoice = Integer.parseInt(IO.readln("Choose one"));
             switch (chairmanChoice) {
-                case 1 -> IO.println("Du opretter et medlem.");
+                case 1 -> registerMember();
                 case 2 -> IO.println("Du redigerer et medlem.");
                 case 0 -> chairmanIsRunning = false;
                 default -> IO.println("Ugyldigt valg.");
@@ -83,40 +90,37 @@ public class UI {
                 default -> IO.println("Ugyldigt valg.");
             }
         }
-
-    private Club club;
-
-    public UI (Club club) {
-        this.club = club;
     }
 
-    public void registerMember() {
-        IO.println();
-        IO.println("Registrer nyt medlem");
-        IO.println();
 
-        int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: "));
+        public void registerMember() {
+            IO.println();
+            IO.println("Registrer nyt medlem");
+            IO.println();
 
-        if (club.findMemberByMemberId(memberId) != null) {
-            IO.println("Dette medlemsnummer findes allerede.");
-            return;
+            int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: "));
+
+            if (club.findMemberByMemberId(memberId) != null) {
+                IO.println("Dette medlemsnummer findes allerede.");
+                return;
+            }
+
+            String name = IO.readln("Indtast navn: ");
+            String address = IO.readln("Indtast adresse: ");
+            String phoneNumber = IO.readln("Indtast telefonnummer: ");
+            String email = IO.readln("Indtast email: ");
+            LocalDate birthday = LocalDate.parse(IO.readln("Indtast fødselsdato (yyyy-mm-dd): "));
+
+            Member member = new Member(memberId, name, address, phoneNumber, email, birthday);
+
+            club.addMember(member);
+
+            IO.println();
+            IO.println("Medlem registreret");
+            IO.println();
+            IO.println(member);
+
+
         }
-
-        String name = IO.readln("Indtast navn: ");
-        String address = IO.readln("Indtast adresse: ");
-        String phoneNumber = IO.readln("Indtast telefonnummer: ");
-        String email = IO.readln("Indtast email: ");
-        LocalDate birthday = LocalDate.parse(IO.readln("Indtast fødselsdato (yyyy-mm-dd): "));
-
-        Member member = new Member(memberId, name, address, phoneNumber, email, birthday);
-
-        club.addMember(member);
-
-        IO.println();
-        IO.println("Medlem registreret");
-        IO.println();
-        IO.println(member);
-
-
     }
-}
+
