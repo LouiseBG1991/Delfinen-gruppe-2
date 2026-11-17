@@ -7,7 +7,8 @@ public class TestUI {
 
 @BeforeEach
 void setup (){
-    UI ui = new UI();
+    Club club = new Club();
+    UI ui = new UI(club);
 }
 @Test
 void testUI (){

@@ -8,6 +8,7 @@ public class Member {
     private String phoneNumber;
     private String email;
     private LocalDate birthday;
+    private MemberShip membership;
 
     public Member(int memberId, String name, String address, String phoneNumber, String email, LocalDate birthday) {
         this.memberId = memberId;
