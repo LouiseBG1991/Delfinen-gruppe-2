@@ -111,7 +111,7 @@ public class UI {
             String email = IO.readln("Indtast email: ");
             LocalDate birthday = LocalDate.parse(IO.readln("Indtast fødselsdato (yyyy-mm-dd): "));
 
-            Member member = new Member(memberId, name, address, phoneNumber, email, birthday);
+            Member member = new Member(memberId, name, address, phoneNumber, email, birthday, new MemberShip());
 
             club.addMember(member);
 
