@@ -104,8 +104,10 @@ public class UI {
 
         int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: ").trim());
 
-        if (club.findMemberByMemberId(memberId) != null) {
-            IO.println("Dette medlemsnummer findes allerede.");
+        try {
+            club.doesMemberIdAlreadyExist(memberId);
+        } catch (IllegalArgumentException e) {
+            IO.println("Medlemsnummeret findes allerede. Prøv igen.");
             return;
         }
 
@@ -117,15 +119,14 @@ public class UI {
 
         // tilføj medlemskab her
 
-            Member member = new Member(memberId, name, address, phoneNumber, email, birthday);
+                Member member = new Member(memberId, name, address, phoneNumber, email, birthday);
 
-            club.addMember(member);
+                club.addMember(member);
 
-            IO.println();
-            IO.println("Medlem registreret.");
-            IO.println();
-            IO.println(member);
-
+                IO.println();
+                IO.println("Medlem registreret.");
+                IO.println();
+                IO.println(member);
 
         }
 

@@ -7,6 +7,7 @@ public class Club {
 
 
     public void addMember(Member member) {
+        doesMemberIdAlreadyExist(member.getMemberId());
         members.add(member);
     }
 
@@ -26,6 +27,12 @@ public class Club {
     public void printMembers() {
         for (Member member : members) {
             IO.println(member);
+        }
+    }
+
+    public void doesMemberIdAlreadyExist(int memberId) {
+        if(findMemberByMemberId(memberId) != null) {
+            throw new IllegalArgumentException();
         }
     }
 }
