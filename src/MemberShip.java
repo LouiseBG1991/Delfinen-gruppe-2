@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.Period;
+
 public class MemberShip {
     private MemberShipStatus status;
     private SwimmerType swimmerType;
@@ -32,5 +35,17 @@ public class MemberShip {
     public MemberShipStatus getStatus() {return status;}
     public SwimmerType getSwimmerType() {return swimmerType;}
 
+
+
+    public int calculateAge(LocalDate birthday){
+        return Period.between(birthday, LocalDate.now()).getYears();
+    }
+
+    public boolean isJunior(LocalDate birthday) {
+        return calculateAge(birthday) < 18;
+    }
+    public Boolean isSenior(LocalDate birthday) {
+        return !isJunior(birthday);
+    }
 
 }
