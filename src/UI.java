@@ -79,8 +79,6 @@ public class UI {
                 case 1 -> IO.println("test");
                 case 0 -> kassererIsRunning = false;
                 default -> IO.println("Ugyldigt valg.");
-
-
             }
         }
     }
