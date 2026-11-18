@@ -119,68 +119,100 @@ public class UI {
 
         // tilføj medlemskab her
 
-                Member member = new Member(memberId, name, address, phoneNumber, email, birthday, new MemberShip());
+        Member member = new Member(memberId, name, address, phoneNumber, email, birthday, new MemberShip());
 
-                club.addMember(member);
+        club.addMember(member);
 
-                IO.println();
-                IO.println("Medlem registreret.");
-                IO.println();
-                IO.println(member);
+        IO.println();
+        IO.println("Medlem registreret.");
+        IO.println();
+        IO.println(member);
 
+    }
+
+    public void editMember() {
+        boolean editIsRunning = true;
+
+        IO.println();
+        IO.println("---------Rediger medlem---------");
+        IO.println();
+
+        int chosenMember = Integer.parseInt(IO.readln("Indtast medlemsnummer på det medlem, hvis oplysninger vil redigere: ").trim());
+
+        Member member = club.findMemberByMemberId(chosenMember);
+
+        if (member == null) {
+            IO.println("Medlemmet findes ikke.");
+            return;
         }
 
-        public void editMember () {
-            boolean editIsRunning = true;
+        IO.println("1. Ændre navn");
+        IO.println("2. Ændre email");
+        IO.println("3. Ændre adresse");
+        IO.println("4. Ændre telefonnummer");
+        IO.println("0. Gå tilbage");
 
-            IO.println();
-            IO.println("---------Rediger medlem---------");
-            IO.println();
-
-            int chosenMember = Integer.parseInt(IO.readln("Indtast medlemsnummer på det medlem, hvis oplysninger vil redigere: ").trim());
-
-            Member member = club.findMemberByMemberId(chosenMember);
-
-            if (member == null) {
-                IO.println("Medlemmet findes ikke.");
-                return;
+        while (editIsRunning) {
+            int editWhat = Integer.parseInt(IO.readln("Hvad vil du gerne ændre? "));
+            switch (editWhat) {
+                case 1 -> member.setName(IO.readln("Indtast nyt navn: "));
+                case 2 -> member.setEmail(IO.readln("Indtast ny email: "));
+                case 3 -> member.setAddress(IO.readln("Indtast ny adresse: "));
+                case 4 -> member.setPhoneNumber(IO.readln("Indtast nyt telefonnummer: "));
+                case 0 -> editIsRunning = false;
+                default -> IO.println("Udgyldigt valg");
             }
-
-            IO.println("1. Ændre navn");
-            IO.println("2. Ændre email");
-            IO.println("3. Ændre adresse");
-            IO.println("4. Ændre telefonnummer");
-            IO.println("0. Gå tilbage");
-
-            while (editIsRunning) {
-                int editWhat = Integer.parseInt(IO.readln("Hvad vil du gerne ændre? "));
-                switch (editWhat) {
-                    case 1 -> member.setName(IO.readln("Indtast nyt navn: "));
-                    case 2 -> member.setEmail(IO.readln("Indtast ny email: "));
-                    case 3 -> member.setAddress(IO.readln("Indtast ny adresse: "));
-                    case 4 -> member.setPhoneNumber(IO.readln("Indtast nyt telefonnummer: "));
-                    case 0 -> editIsRunning = false;
-                    default -> IO.println("Udgyldigt valg");
-                }
-                IO.println("\nMedlemmet er opdateret\n" + member);
-            }
-
+            IO.println("\nMedlemmet er opdateret\n" + member);
         }
 
-        public void showMembers () {
-            IO.println();
-            IO.println("---------Vis oversigt over medlemmer---------");
-            IO.println();
+    }
 
-            if (club.getMembers().isEmpty()) {
-                IO.println("Der er ingen medlemmer i klubben.");
-                return;
+    public void showMembers() {
+        IO.println();
+        IO.println("---------Vis oversigt over medlemmer---------");
+        IO.println();
+
+        if (club.getMembers().isEmpty()) {
+            IO.println("Der er ingen medlemmer i klubben.");
+            return;
+        }
+
+        club.printMembers();
+    }
+
+
+    private MemberShip chooseMemberShip() {
+        IO.println("""
+                Vælg medlemskab:
+                1. Passivt medlemskab
+                2. Aktiv - Motionist
+                3. Aktiv Konkurrencesvømmer""");
+
+        int menuChoice = Integer.parseInt(IO.readln("Vælg (1-3): ").trim());
+
+        return switch (menuChoice) {
+            case 2 -> new MemberShip(SwimmerType.CASUAL); // Motionist
+            case 3 -> new MemberShip(SwimmerType.COMPETITIVE); // Konkurrencesvømmer
+            default -> new MemberShip(); // Opretter passivt medlemskab som standard
+        };
+    }
+
+
+    private void printTop5(Team team, Discipline discipline) {
+        IO.println(("\n————— Top 5: "  + team.getTeamName() + " (" + discipline + ") —————"));
+        List<CompetitionSwimmer> top5 = team.getTop5(discipline);
+
+        if (top5.isEmpty()) {
+            IO.println("Ingen registrerede tideri denne disciplin endnu.");
+        } else {
+            int rank = 1;
+            for (CompetitionSwimmer swimmer : top5) {
+                SwimResult best = swimmer.getBestResult(discipline);
+                IO.println(rank + ". " + swimmer.getName() + " - " + best);
+                rank++;
             }
-
-            club.printMembers();
-
-
         }
     }
+}
 
 
