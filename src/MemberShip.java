@@ -6,9 +6,9 @@ public class MemberShip {
     private SwimmerType swimmerType;
 
 
-    //Opretter et passivt medlemskab
+    //Opretter et medlemskab uden valgt status endnu (NONE)
     public MemberShip(){
-        this.status = MemberShipStatus.PASSIVE;
+        this.status = MemberShipStatus.NONE;
         this.swimmerType = SwimmerType.NONE;
     }
 
@@ -18,9 +18,33 @@ public class MemberShip {
     }
 
     //Setters
+
+    public void setStatus(MemberShipStatus status) {
+        if (status == null) {
+            throw new IllegalArgumentException();
+        }
+        this.status = status;
+
+        if (status != MemberShipStatus.ACTIVE) {
+            this.swimmerType = SwimmerType.NONE;
+        }
+    }
+
+    public void setSwimmerType(SwimmerType swimmerType) {
+        if (swimmerType == null) {
+            throw new IllegalArgumentException();
+        }
+        if (swimmerType != SwimmerType.NONE && this.status != MemberShipStatus.ACTIVE) {
+            throw new IllegalStateException();
+        }
+        this.swimmerType = swimmerType;
+    }
+
+
+
     public void setActive(SwimmerType swimmerType){
         if (swimmerType == null || swimmerType == SwimmerType.NONE) {
-            throw new IllegalArgumentException("Aktivt medlemskab kræver man er motionist eller konkurrencesvømmer.");
+            throw new IllegalArgumentException();
         }
         this.status = MemberShipStatus.ACTIVE;
         this.swimmerType = swimmerType;
@@ -31,12 +55,18 @@ public class MemberShip {
         this.swimmerType = SwimmerType.NONE;
     }
 
+
+
+
+
     //Getters
     public MemberShipStatus getStatus() {return status;}
     public SwimmerType getSwimmerType() {return swimmerType;}
 
 
 
+
+    // Aldersberegning
     public int calculateAge(LocalDate birthday){
         return Period.between(birthday, LocalDate.now()).getYears();
     }
