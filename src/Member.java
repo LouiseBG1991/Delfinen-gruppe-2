@@ -21,6 +21,8 @@ public class Member {
 
     }
 
+    //Getters og setters
+
     public int getMemberId() {
         return memberId;
     }
@@ -48,6 +50,23 @@ public class Member {
     public MemberShip getMembership() {
         return membership;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
 
     @Override
     public String toString() {
