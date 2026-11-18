@@ -165,6 +165,7 @@ public class UI {
                 IO.println("\nMedlemmet er opdateret\n" + member);
             }
 
+            Member member = new Member(memberId, name, address, phoneNumber, email, birthday, new MemberShip());
 
         }
 

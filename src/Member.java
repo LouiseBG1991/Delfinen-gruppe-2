@@ -10,13 +10,14 @@ public class Member {
     private LocalDate birthday;
     private MemberShip membership;
 
-    public Member(int memberId, String name, String address, String phoneNumber, String email, LocalDate birthday) {
+    public Member(int memberId, String name, String address, String phoneNumber, String email, LocalDate birthday, MemberShip memberShip) {
         this.memberId = memberId;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.birthday = birthday;
+        this.membership = memberShip;
 
     }
 
@@ -44,6 +45,10 @@ public class Member {
 
     public LocalDate getBirthday() {
         return birthday;
+    }
+
+    public MemberShip getMembership() {
+        return membership;
     }
 
     public void setName(String name) {
