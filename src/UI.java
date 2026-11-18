@@ -119,7 +119,7 @@ public class UI {
 
         // tilføj medlemskab her
 
-                Member member = new Member(memberId, name, address, phoneNumber, email, birthday);
+                Member member = new Member(memberId, name, address, phoneNumber, email, birthday, new MemberShip());
 
                 club.addMember(member);
 
@@ -164,8 +164,6 @@ public class UI {
                 }
                 IO.println("\nMedlemmet er opdateret\n" + member);
             }
-
-            Member member = new Member(memberId, name, address, phoneNumber, email, birthday, new MemberShip());
 
         }
 

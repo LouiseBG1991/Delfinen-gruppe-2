@@ -10,8 +10,8 @@ public class ClubTest {
     void addMemberTest() {
         //Arrange
         Club club = new Club();
-        Member member = new Member(111, "Louise", "Norgesgade 17", "21212121","louise@gmail.com", LocalDate.of(1991, 9, 6));
-        Member member1 = new Member(222, "Marie", "Skyttegade 10", "22222222", "marie@gmail.com", LocalDate.of(1995, 7, 9));
+        Member member = new Member(111, "Louise", "Norgesgade 17", "21212121","louise@gmail.com", LocalDate.of(1991, 9, 6), new MemberShip());
+        Member member1 = new Member(222, "Marie", "Skyttegade 10", "22222222", "marie@gmail.com", LocalDate.of(1995, 7, 9), new MemberShip());
 
 
         //Act
@@ -27,8 +27,8 @@ public class ClubTest {
     void duplicatedIdTest() {
         //Arrange
         Club club = new Club();
-        Member member = new Member(111,"Louise", "Norgesgade 17", "21212121","louise@gmail.com", LocalDate.of(1991, 9, 6));
-        Member member1 = new Member(111, "Marie", "Skyttegade 10", "22222222", "marie@gmail.com", LocalDate.of(1995, 7, 9));
+        Member member = new Member(111,"Louise", "Norgesgade 17", "21212121","louise@gmail.com", LocalDate.of(1991, 9, 6), new MemberShip());
+        Member member1 = new Member(111, "Marie", "Skyttegade 10", "22222222", "marie@gmail.com", LocalDate.of(1995, 7, 9), new MemberShip());
 
         //Act
         club.addMember(member);

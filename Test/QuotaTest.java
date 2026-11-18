@@ -9,8 +9,8 @@ public class QuotaTest {
     public void testCalculateYearlyQuotaUnder18() {
         MemberShip memberShip = new MemberShip(SwimmerType.CASUAL);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(2018, 12, 24), memberShip );
-        Quota quota = new Quota(member);
-        double result = quota.calculateYearlyQuota(member);
+        MemberFee memberFee = new MemberFee(member);
+        double result = memberFee.calculateYearlyMemberFee(member);
 
         assertEquals(1000, result);
     }
@@ -19,8 +19,8 @@ public class QuotaTest {
     public void testCalculateYearlyQuotaAbove18() {
         MemberShip memberShip = new MemberShip(SwimmerType.COMPETITIVE);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(2000, 12, 24), memberShip);
-        Quota quota = new Quota(member);
-        double result = quota.calculateYearlyQuota(member);
+        MemberFee memberFee = new MemberFee(member);
+        double result = memberFee.calculateYearlyMemberFee(member);
 
         assertEquals(1600, result);
     }
@@ -29,8 +29,8 @@ public class QuotaTest {
     public void testCalculateYearlyQuotaAbove60() {
         MemberShip memberShip = new MemberShip(SwimmerType.COMPETITIVE);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(1965, 12, 24), memberShip);
-        Quota quota = new Quota(member);
-        double result = quota.calculateYearlyQuota(member);
+        MemberFee memberFee = new MemberFee(member);
+        double result = memberFee.calculateYearlyMemberFee(member);
 
         assertEquals(1200, result);
     }
@@ -39,8 +39,8 @@ public class QuotaTest {
     public void testCalculateYearlyQuotaAbove60SameYear() {
         MemberShip memberShip = new MemberShip(SwimmerType.CASUAL);
         Member member =new Member(1, "jan", "AD", "+23", "@", LocalDate.of(1966, 12, 24), memberShip);
-        Quota quota = new Quota(member);
-        double result = quota.calculateYearlyQuota(member);
+        MemberFee memberFee = new MemberFee(member);
+        double result = memberFee.calculateYearlyMemberFee(member);
 
         assertEquals(1600, result);
     }
@@ -49,8 +49,8 @@ public class QuotaTest {
     public void testCalculateYearlyQuotaIsPassive() {
         MemberShip memberShip = new MemberShip();
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(2000, 12, 24), memberShip);
-        Quota quota = new Quota(member);
-        double result = quota.calculateYearlyQuota(member);
+        MemberFee memberFee = new MemberFee(member);
+        double result = memberFee.calculateYearlyMemberFee(member);
 
         assertEquals(500, result);
     }
@@ -59,8 +59,8 @@ public class QuotaTest {
     public void testcalculateQuotaUnder18() {
         MemberShip memberShip = new MemberShip(SwimmerType.CASUAL);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(2018, 12, 24), memberShip );
-        Quota quota = new Quota(member);
-        double result = quota.calculateQuota(member);
+        MemberFee memberFee = new MemberFee(member);
+        double result = memberFee.calculateMemberFee(member);
 
         assertEquals(83.33, result);
     }
@@ -69,8 +69,8 @@ public class QuotaTest {
     public void testCalculateQuotaAbove18() {
         MemberShip memberShip = new MemberShip(SwimmerType.CASUAL);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(2000, 12, 24), memberShip );
-        Quota quota = new Quota(member);
-        double result = quota.calculateQuota(member);
+        MemberFee memberFee = new MemberFee(member);
+        double result = memberFee.calculateMemberFee(member);
 
         assertEquals(133.33, result);
     }
@@ -79,8 +79,8 @@ public class QuotaTest {
     public void testCalculateQuotaAbove60() {
         MemberShip memberShip = new MemberShip(SwimmerType.CASUAL);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(1965, 12, 24), memberShip );
-        Quota quota = new Quota(member);
-        double result = quota.calculateQuota(member);
+        MemberFee memberFee = new MemberFee(member);
+        double result = memberFee.calculateMemberFee(member);
 
         assertEquals(100, result);
     }

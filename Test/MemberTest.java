@@ -9,7 +9,7 @@ public class MemberTest {
     @Test
     void createMemberTest() {
         //Arrange
-        Member member = new Member(111, "Louise", "Norgesgade 17", "21212121","louise@gmail.com", LocalDate.of(1991, 9, 6));
+        Member member = new Member(111, "Louise", "Norgesgade 17", "21212121","louise@gmail.com", LocalDate.of(1991, 9, 6), new MemberShip());
 
         //Assert
         assertEquals(111, member.getMemberId());
