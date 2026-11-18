@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UI {
 
@@ -44,7 +46,7 @@ public class UI {
         IO.println("0. Slut");
 
         while (trainerIsRunning) {
-            int trainerChoice = Integer.parseInt(IO.readln("Vælg"));
+            int trainerChoice = Integer.parseInt(IO.readln("Vælg en mulighed"));
 
             switch (trainerChoice) {
                 case 0 -> trainerIsRunning = false;
@@ -60,13 +62,15 @@ public class UI {
         IO.println();
         IO.println("1. Opret medlem");
         IO.println("2. Rediger medlem");
+        IO.println("3. Vis medlemmer");
         IO.println("0. Slut");
 
         while (chairmanIsRunning) {
-            int chairmanChoice = Integer.parseInt(IO.readln("Choose one"));
+            int chairmanChoice = Integer.parseInt(IO.readln("Vælg en mulighed"));
             switch (chairmanChoice) {
                 case 1 -> registerMember();
-                case 2 -> IO.println("Du redigerer et medlem.");
+                case 2 -> editMember();
+                case 3 -> showMembers();
                 case 0 -> chairmanIsRunning = false;
                 default -> IO.println("Ugyldigt valg.");
             }
@@ -79,10 +83,10 @@ public class UI {
         IO.println();
         IO.println("1. Årlig indtjening");
         IO.println("2. Medlemmer i restance");
-        IO.println("0. End");
+        IO.println("0. Slut");
 
         while (kassererIsRunning) {
-            int kassererChoice = Integer.parseInt(IO.readln("Choose one"));
+            int kassererChoice = Integer.parseInt(IO.readln("Vælg en mulighed: "));
 
             switch (kassererChoice) {
                 case 1 -> IO.println("test");
@@ -93,34 +97,91 @@ public class UI {
     }
 
 
-        public void registerMember() {
+    public void registerMember() {
+        IO.println();
+        IO.println("--------Registrer nyt medlem---------");
+        IO.println();
+
+        int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: ").trim());
+
+        try {
+            club.doesMemberIdAlreadyExist(memberId);
+        } catch (IllegalArgumentException e) {
+            IO.println("Medlemsnummeret findes allerede. Prøv igen.");
+            return;
+        }
+
+        String name = IO.readln("Indtast navn: ").trim();
+        String address = IO.readln("Indtast adresse: ").trim();
+        String phoneNumber = IO.readln("Indtast telefonnummer: ").trim();
+        String email = IO.readln("Indtast email: ").trim();
+        LocalDate birthday = LocalDate.parse(IO.readln("Indtast fødselsdato (yyyy-mm-dd): ").trim());
+
+        // tilføj medlemskab her
+
+                Member member = new Member(memberId, name, address, phoneNumber, email, birthday);
+
+                club.addMember(member);
+
+                IO.println();
+                IO.println("Medlem registreret.");
+                IO.println();
+                IO.println(member);
+
+        }
+
+        public void editMember () {
+            boolean editIsRunning = true;
+
             IO.println();
-            IO.println("Registrer nyt medlem");
+            IO.println("---------Rediger medlem---------");
             IO.println();
 
-            int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer: "));
+            int chosenMember = Integer.parseInt(IO.readln("Indtast medlemsnummer på det medlem, hvis oplysninger vil redigere: ").trim());
 
-            if (club.findMemberByMemberId(memberId) != null) {
-                IO.println("Dette medlemsnummer findes allerede.");
+            Member member = club.findMemberByMemberId(chosenMember);
+
+            if (member == null) {
+                IO.println("Medlemmet findes ikke.");
                 return;
             }
 
-            String name = IO.readln("Indtast navn: ");
-            String address = IO.readln("Indtast adresse: ");
-            String phoneNumber = IO.readln("Indtast telefonnummer: ");
-            String email = IO.readln("Indtast email: ");
-            LocalDate birthday = LocalDate.parse(IO.readln("Indtast fødselsdato (yyyy-mm-dd): "));
+            IO.println("1. Ændre navn");
+            IO.println("2. Ændre email");
+            IO.println("3. Ændre adresse");
+            IO.println("4. Ændre telefonnummer");
+            IO.println("0. Gå tilbage");
 
-            Member member = new Member(memberId, name, address, phoneNumber, email, birthday);
+            while (editIsRunning) {
+                int editWhat = Integer.parseInt(IO.readln("Hvad vil du gerne ændre? "));
+                switch (editWhat) {
+                    case 1 -> member.setName(IO.readln("Indtast nyt navn: "));
+                    case 2 -> member.setEmail(IO.readln("Indtast ny email: "));
+                    case 3 -> member.setAddress(IO.readln("Indtast ny adresse: "));
+                    case 4 -> member.setPhoneNumber(IO.readln("Indtast nyt telefonnummer: "));
+                    case 0 -> editIsRunning = false;
+                    default -> IO.println("Udgyldigt valg");
+                }
+                IO.println("\nMedlemmet er opdateret\n" + member);
+            }
 
-            club.addMember(member);
 
+        }
+
+        public void showMembers () {
             IO.println();
-            IO.println("Medlem registreret");
+            IO.println("---------Vis oversigt over medlemmer---------");
             IO.println();
-            IO.println(member);
+
+            if (club.getMembers().isEmpty()) {
+                IO.println("Der er ingen medlemmer i klubben.");
+                return;
+            }
+
+            club.printMembers();
 
 
         }
     }
+
 
