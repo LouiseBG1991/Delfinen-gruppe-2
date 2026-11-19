@@ -15,6 +15,8 @@ public class Club {
         return administration.showMembersWithOutstandingPayment();
     }
 
+    private Team juniorTeam = new Team("Juniorholdet", "Anders");
+    private Team seniorTeam = new Team("Seniorholdet", "Mette");
 
     public void addMember(Member member) {
         doesMemberIdAlreadyExist(member.getMemberId());
@@ -24,11 +26,29 @@ public class Club {
         administration.addMemberFee(memberfee);
     }
 
+    public void addCompetitionSwimmer(CompetitionSwimmer swimmer) {
+        members.add(swimmer);
+        if (swimmer.isJunior()) {
+            juniorTeam.addSwimmer(swimmer);
+        } else {
+            seniorTeam.addSwimmer(swimmer);
+        }
+    }
+
     public List<Member> getMembers() {
         return members;
     }
 
     public Member findMemberByMemberId(int memberId) {
+    public Team getJuniorTeam() {
+        return juniorTeam;
+    }
+
+    public Team getSeniorTeam() {
+        return seniorTeam;
+    }
+
+    public Member findMemberByMemberId (int memberId) {
         for (Member member : members) {
             if (memberId == member.getMemberId()) {
                 return member;
