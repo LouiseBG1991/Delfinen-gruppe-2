@@ -1,3 +1,4 @@
+import java.nio.channels.MembershipKey;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,9 +118,9 @@ public class UI {
         String email = IO.readln("Indtast email: ").trim();
         LocalDate birthday = LocalDate.parse(IO.readln("Indtast fødselsdato (yyyy-mm-dd): ").trim());
 
-        // tilføj medlemskab her
+        MemberShip memberShip = chooseMemberShip();
 
-        Member member = new Member(memberId, name, address, phoneNumber, email, birthday, new MemberShip());
+        Member member = new Member(memberId, name, address, phoneNumber, email, birthday, memberShip);
 
         club.addMember(member);
 
@@ -182,19 +183,50 @@ public class UI {
 
 
     private MemberShip chooseMemberShip() {
-        IO.println("""
+        MemberShip memberShip = new MemberShip();
+
+        while (memberShip.getStatus() == MemberShipStatus.NONE) {
+            IO.println("""
                 Vælg medlemskab:
                 1. Passivt medlemskab
+                2. Aktivt medlemskab
                 2. Aktiv - Motionist
                 3. Aktiv Konkurrencesvømmer""");
 
-        int menuChoice = Integer.parseInt(IO.readln("Vælg (1-3): ").trim());
+            String menuChoice = IO.readln("Vælg (1-2): ").trim();
 
-        return switch (menuChoice) {
-            case 2 -> new MemberShip(SwimmerType.CASUAL); // Motionist
-            case 3 -> new MemberShip(SwimmerType.COMPETITIVE); // Konkurrencesvømmer
-            default -> new MemberShip(); // Opretter passivt medlemskab som standard
-        };
+            switch (menuChoice) {
+                case "1" -> memberShip.setPassive();
+                case "2" -> {
+                    memberShip.setStatus(MemberShipStatus.ACTIVE);
+                    chooseSwimmerType(memberShip);
+                }
+                default -> IO.println("Ugyldigt valg. Prøv igen");
+            }
+        }
+        return memberShip;
+    }
+
+
+    private void chooseSwimmerType(MemberShip memberShip) {
+        while (memberShip.getSwimmerType() == SwimmerType.NONE) {
+            IO.println("""
+                    Vælg svømmertype:
+                    1. Motionist
+                    2. Konkurrencesvømmer""");
+
+            String typeChoice = IO.readln("Vælg (1-2)").trim();
+
+            try {
+                switch (typeChoice) {
+                    case "1" -> memberShip.setSwimmerType(SwimmerType.CASUAL);
+                    case "2" -> memberShip.setSwimmerType(SwimmerType.COMPETITIVE);
+                    default -> IO.println("Ugyldig valg. Vælg 1 for Motionist eller 2 for Konkurrencesvømmer.");
+                }
+            } catch (IllegalArgumentException | IllegalStateException e) {
+                IO.println("Motionist eller konkurrencesvømmer kræver, at man har et aktivt medlemskab");
+            }
+        }
     }
 
 
