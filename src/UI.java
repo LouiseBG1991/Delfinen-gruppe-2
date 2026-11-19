@@ -114,17 +114,17 @@ public class UI {
         IO.println("---------Vis oversigt over medlemmer i restance---------");
         IO.println();
 
-       List<Member> outstanding = club.getMembersWithOutstandingPayment();
-       if (outstanding.isEmpty()) {
-           IO.println("Ingen medlemmer i restance");
-       } else {
-           IO.println("Medlemmer i restance: ");
-           for (Member member : outstanding) {
-               IO.println();
-               IO.println(member);
+        List<Member> outstanding = club.getMembersWithOutstandingPayment();
+        if (outstanding.isEmpty()) {
+            IO.println("Ingen medlemmer i restance");
+        } else {
+            IO.println("Medlemmer i restance: ");
+            for (Member member : outstanding) {
+                IO.println();
+                IO.println(member);
 
-           }
-       }
+            }
+        }
 
     }
 
@@ -168,7 +168,7 @@ public class UI {
         IO.println("---------Rediger medlem---------");
         IO.println();
 
-            int chosenMember = Integer.parseInt(IO.readln("Indtast medlemsnummer på det medlem, hvis oplysninger du vil redigere: ").trim());
+        int chosenMember = Integer.parseInt(IO.readln("Indtast medlemsnummer på det medlem, hvis oplysninger du vil redigere: ").trim());
 
         Member member = club.findMemberByMemberId(chosenMember);
 
@@ -217,11 +217,11 @@ public class UI {
 
         while (memberShip.getStatus() == MemberShipStatus.NONE) {
             IO.println("""
-                Vælg medlemskab:
-                1. Passivt medlemskab
-                2. Aktivt medlemskab
-                2. Aktiv - Motionist
-                3. Aktiv Konkurrencesvømmer""");
+                    Vælg medlemskab:
+                    1. Passivt medlemskab
+                    2. Aktivt medlemskab
+                    2. Aktiv - Motionist
+                    3. Aktiv Konkurrencesvømmer""");
 
             String menuChoice = IO.readln("Vælg (1-2): ").trim();
 
@@ -259,12 +259,9 @@ public class UI {
         }
     }
 
-            club.printMembers();
-            IO.println();
-            IO.println("Antal medlemmer: " + club.membersInTotal());
 
     private void printTop5(Team team, Discipline discipline) {
-        IO.println(("\n————— Top 5: "  + team.getTeamName() + " (" + discipline + ") —————"));
+        IO.println(("\n————— Top 5: " + team.getTeamName() + " (" + discipline + ") —————"));
         List<CompetitionSwimmer> top5 = team.getTop5(discipline);
 
         if (top5.isEmpty()) {

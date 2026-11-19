@@ -39,16 +39,16 @@ public class Club {
         return members;
     }
 
-    public Member findMemberByMemberId(int memberId) {
-    public Team getJuniorTeam() {
-        return juniorTeam;
-    }
+        public Team getJuniorTeam () {
+            return juniorTeam;
+        }
+
 
     public Team getSeniorTeam() {
         return seniorTeam;
     }
 
-    public Member findMemberByMemberId (int memberId) {
+    public Member findMemberByMemberId(int memberId) {
         for (Member member : members) {
             if (memberId == member.getMemberId()) {
                 return member;
@@ -77,7 +77,4 @@ public class Club {
         }
         return membersInTotal;
     }
-
 }
-
-
