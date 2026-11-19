@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -6,6 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ClubTest {
 
+    @BeforeEach
+    void setup(){
+        Club club = new Club();
+        Member member = new Member(111, "Louise", "Norgesgade 17", "21212121","louise@gmail.com", LocalDate.of(1991, 9, 6), new MemberShip());
+        Member member1 = new Member(222, "Marie", "Skyttegade 10", "22222222", "marie@gmail.com", LocalDate.of(1995, 7, 9), new MemberShip());
+    }
     @Test
     void addMemberTest() {
         //Arrange
@@ -37,6 +44,7 @@ public class ClubTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> club.addMember(member1));
     }
+
 
 
 }
