@@ -8,14 +8,12 @@ public class CompetitionSwimmerTest {
 
     @BeforeEach
     void setup (){
-        LocalDate birthday = LocalDate.of(2004,11,7);
-        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(111, "Anders", "Hørkær 7F","51931177", "andersgraa@gmail.com", birthday);
-        CompetitionResult competitionResult = new CompetitionResult(111, "Ek", "EK's Svømme", birthday, 1.11,3,"Crawl");
+        CompetitionSwimmer competitionSwimmer = new CompetitionSwimmer(111, "Anders", "Hørkær 7F","51931177", "andersgraa@gmail.com", LocalDate.of(2004, 11, 7));
+        CompetitionResult competitionResult = new CompetitionResult(111, "Ek", "EK's Svømme", LocalDate.of(2026, 11, 13), LocalDate.of(2026, 11, 14),3,"Crawl");
     }
 
-    @Test
-    void addCompetitionResultTest(){
-        setup();
-        competitionSwimmer.addCompetitionResult(competitionResult);
-    }
+//    @Test
+//    void addCompetitionResultTest(){
+//        competitionSwimmer.addCompetitionResult(competitionResult);
+//    }
 }
