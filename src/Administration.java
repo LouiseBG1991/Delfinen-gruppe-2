@@ -34,4 +34,21 @@ public class Administration {
         return outstanding;
     }
 
+    public boolean registerPayment(int memberId) {
+        for (MemberFee memberFee : memberFees) {
+            if (memberFee.getMember().getMemberId() == memberId) {
+                if (memberFee.getPaymentResult() == PaymentResult.PAID) {
+                    return false;
+                }
+
+                memberFee.memberHasPaid();
+                return true;
+            }
+        }
+
+        return false;
+
+
+    }
+
 }

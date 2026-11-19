@@ -84,6 +84,7 @@ public class UI {
         IO.println();
         IO.println("1. Årlig indtjening");
         IO.println("2. Medlemmer i restance");
+        IO.println("3. Registrer betaling af kontingent");
         IO.println("0. Slut");
 
         while (kassererIsRunning) {
@@ -92,6 +93,7 @@ public class UI {
             switch (kassererChoice) {
                 case 1 -> showExpectedAnnualRevenue();
                 case 2 -> showMembersWithOutstandingPayment();
+                case 3 -> registerPayment();
                 case 0 -> kassererIsRunning = false;
                 default -> IO.println("Ugyldigt valg.");
             }
@@ -124,6 +126,22 @@ public class UI {
                 IO.println(member);
 
             }
+        }
+
+    }
+
+    public void registerPayment() {
+        IO.println();
+        IO.println("-----------Betaling af kontingent----------");
+        IO.println();
+
+        int memberId = Integer.parseInt(IO.readln("Indtast medlemsnummer på det medlem, hvis kontingentbetaling du vil registre: ").trim());
+
+        boolean registered = club.registerPayment(memberId);
+        if (registered) {
+            IO.println("Betalingen er registreret.");
+        } else {
+            IO.println("Betalingen kunne ikke registreres.");
         }
 
     }
@@ -208,6 +226,8 @@ public class UI {
             return;
         }
 
+        IO.println("Antal medlemmer i klubben: " + club.membersInTotal());
+        IO.println();
         club.printMembers();
     }
 
