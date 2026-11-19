@@ -23,4 +23,28 @@ public class CompetitionResult {
         CompetitionResult competitionResult = new CompetitionResult(memberId, place, convention, time, finishTime, placement, discipline);
         return competitionResult;
     }
+
+    public int getMemberId() {
+        return memberId;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+    public String getConvention() {
+        return convention;
+    }
+    public LocalDate getTime() {
+        return time;
+    }
+    public LocalDate getFinishTime() {
+    return finishTime;
+    }
+
+    public int getPlacement() {
+        return placement;
+    }
+    public String getDiscipline() {
+        return discipline;
+    }
 }

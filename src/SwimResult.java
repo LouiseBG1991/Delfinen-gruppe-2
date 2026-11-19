@@ -30,6 +30,9 @@ public class SwimResult {
     public Discipline getDiscipline() {return discipline;}
     public double getFinishTime() {return finishTime;}
     public boolean isCompetition() {return isCompetition;}
+    public LocalDate getDate() {return date;}
+    public String getCompetitionName() {return competitionName;}
+    public int getPlacement() {return placement;}
 
 
     @Override
