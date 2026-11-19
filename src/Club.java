@@ -4,6 +4,16 @@ import java.util.List;
 public class Club {
 
     private List<Member> members = new ArrayList<>();
+    private Administration administration = new Administration();
+
+
+    public double getExpectedAnnualRevenue() {
+        return administration.expectedAnnualRevenue();
+    }
+
+    public List<Member> getMembersWithOutstandingPayment() {
+        return administration.showMembersWithOutstandingPayment();
+    }
 
     private Team juniorTeam = new Team("Juniorholdet", "Anders");
     private Team seniorTeam = new Team("Seniorholdet", "Mette");
@@ -11,6 +21,9 @@ public class Club {
     public void addMember(Member member) {
         doesMemberIdAlreadyExist(member.getMemberId());
         members.add(member);
+
+        MemberFee memberfee = new MemberFee(member);
+        administration.addMemberFee(memberfee);
     }
 
     public void addCompetitionSwimmer(CompetitionSwimmer swimmer) {
@@ -26,6 +39,7 @@ public class Club {
         return members;
     }
 
+    public Member findMemberByMemberId(int memberId) {
     public Team getJuniorTeam() {
         return juniorTeam;
     }
@@ -50,9 +64,18 @@ public class Club {
     }
 
     public void doesMemberIdAlreadyExist(int memberId) {
-        if(findMemberByMemberId(memberId) != null) {
+        if (findMemberByMemberId(memberId) != null) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public int membersInTotal() {
+
+        int membersInTotal = 0;
+        for (Member member : members) {
+            membersInTotal++;
+        }
+        return membersInTotal;
     }
 
 }

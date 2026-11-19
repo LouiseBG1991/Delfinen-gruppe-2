@@ -90,13 +90,43 @@ public class UI {
             int kassererChoice = Integer.parseInt(IO.readln("Vælg en mulighed: "));
 
             switch (kassererChoice) {
-                case 1 -> IO.println("test");
+                case 1 -> showExpectedAnnualRevenue();
+                case 2 -> showMembersWithOutstandingPayment();
                 case 0 -> kassererIsRunning = false;
                 default -> IO.println("Ugyldigt valg.");
             }
         }
     }
 
+    public void showExpectedAnnualRevenue() {
+        IO.println();
+        IO.println("---------Vis oversigt over forventet indtægt---------");
+        IO.println();
+
+        double revenue = club.getExpectedAnnualRevenue();
+
+        IO.println("Forventet indtægt: " + revenue + "kr.");
+
+    }
+
+    public void showMembersWithOutstandingPayment() {
+        IO.println();
+        IO.println("---------Vis oversigt over medlemmer i restance---------");
+        IO.println();
+
+       List<Member> outstanding = club.getMembersWithOutstandingPayment();
+       if (outstanding.isEmpty()) {
+           IO.println("Ingen medlemmer i restance");
+       } else {
+           IO.println("Medlemmer i restance: ");
+           for (Member member : outstanding) {
+               IO.println();
+               IO.println(member);
+
+           }
+       }
+
+    }
 
     public void registerMember() {
         IO.println();
@@ -108,7 +138,7 @@ public class UI {
         try {
             club.doesMemberIdAlreadyExist(memberId);
         } catch (IllegalArgumentException e) {
-            IO.println("Medlemsnummeret findes allerede. Prøv igen.");
+            IO.println("Medlemsnummeret findes allerede.");
             return;
         }
 
@@ -138,7 +168,7 @@ public class UI {
         IO.println("---------Rediger medlem---------");
         IO.println();
 
-        int chosenMember = Integer.parseInt(IO.readln("Indtast medlemsnummer på det medlem, hvis oplysninger vil redigere: ").trim());
+            int chosenMember = Integer.parseInt(IO.readln("Indtast medlemsnummer på det medlem, hvis oplysninger du vil redigere: ").trim());
 
         Member member = club.findMemberByMemberId(chosenMember);
 
@@ -229,6 +259,9 @@ public class UI {
         }
     }
 
+            club.printMembers();
+            IO.println();
+            IO.println("Antal medlemmer: " + club.membersInTotal());
 
     private void printTop5(Team team, Discipline discipline) {
         IO.println(("\n————— Top 5: "  + team.getTeamName() + " (" + discipline + ") —————"));

@@ -10,7 +10,7 @@ public class QuotaTest {
         MemberShip memberShip = new MemberShip(SwimmerType.CASUAL);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(2018, 12, 24), memberShip );
         MemberFee memberFee = new MemberFee(member);
-        double result = memberFee.calculateYearlyMemberFee(member);
+        double result = memberFee.calculateFeeByMemberShip(member);
 
         assertEquals(1000, result);
     }
@@ -20,7 +20,7 @@ public class QuotaTest {
         MemberShip memberShip = new MemberShip(SwimmerType.COMPETITIVE);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(2000, 12, 24), memberShip);
         MemberFee memberFee = new MemberFee(member);
-        double result = memberFee.calculateYearlyMemberFee(member);
+        double result = memberFee.calculateFeeByMemberShip(member);
 
         assertEquals(1600, result);
     }
@@ -30,7 +30,7 @@ public class QuotaTest {
         MemberShip memberShip = new MemberShip(SwimmerType.COMPETITIVE);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(1965, 12, 24), memberShip);
         MemberFee memberFee = new MemberFee(member);
-        double result = memberFee.calculateYearlyMemberFee(member);
+        double result = memberFee.calculateFeeByMemberShip(member);
 
         assertEquals(1200, result);
     }
@@ -40,7 +40,7 @@ public class QuotaTest {
         MemberShip memberShip = new MemberShip(SwimmerType.CASUAL);
         Member member =new Member(1, "jan", "AD", "+23", "@", LocalDate.of(1966, 12, 24), memberShip);
         MemberFee memberFee = new MemberFee(member);
-        double result = memberFee.calculateYearlyMemberFee(member);
+        double result = memberFee.calculateFeeByMemberShip(member);
 
         assertEquals(1600, result);
     }
@@ -50,7 +50,7 @@ public class QuotaTest {
         MemberShip memberShip = new MemberShip();
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(2000, 12, 24), memberShip);
         MemberFee memberFee = new MemberFee(member);
-        double result = memberFee.calculateYearlyMemberFee(member);
+        double result = memberFee.calculateFeeByMemberShip(member);
 
         assertEquals(500, result);
     }
@@ -60,7 +60,7 @@ public class QuotaTest {
         MemberShip memberShip = new MemberShip(SwimmerType.CASUAL);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(2018, 12, 24), memberShip );
         MemberFee memberFee = new MemberFee(member);
-        double result = memberFee.calculateMemberFee(member);
+        double result = memberFee.calculateFeeByMemberShip(member);
 
         assertEquals(83.33, result);
     }
@@ -70,7 +70,7 @@ public class QuotaTest {
         MemberShip memberShip = new MemberShip(SwimmerType.CASUAL);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(2000, 12, 24), memberShip );
         MemberFee memberFee = new MemberFee(member);
-        double result = memberFee.calculateMemberFee(member);
+        double result = memberFee.calculateFeeByMemberShip(member);
 
         assertEquals(133.33, result);
     }
@@ -80,7 +80,7 @@ public class QuotaTest {
         MemberShip memberShip = new MemberShip(SwimmerType.CASUAL);
         Member member = new Member(1, "jan", "AD", "+23", "@", LocalDate.of(1965, 12, 24), memberShip );
         MemberFee memberFee = new MemberFee(member);
-        double result = memberFee.calculateMemberFee(member);
+        double result = memberFee.calculateFeeByMemberShip(member);
 
         assertEquals(100, result);
     }
