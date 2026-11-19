@@ -1,23 +1,57 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class AdministrationTest {
-    Member member;
-    MemberFee memberFee;
-    MemberShip memberShip;
+import java.time.LocalDate;
+
+class AdministrationTest {
+
+    Administration administration;
+    Member member1;
+    Member member2;
+    MemberFee fee1;
+    MemberFee fee2;
 
     @BeforeEach
-    void setup(){
-       // memberShip = new MemberShip()
-        //member = new Member(111, "Anders", "Hørkær 7F","51931177", "andersgraa@gmail.com", LocalDate.of(2004, 11, 7), MemberShipStatus.ACTIVE);
-        //memberFee = new MemberFee()
+    void setUp() {
+        administration = new Administration();
+
+        MemberShip membership1 = new MemberShip();
+        MemberShip membership2 = new MemberShip();
+
+        member1 = new Member(1, "Anders", "Copenhagen", "12345678", "anders@gmail.com", LocalDate.of(2000, 1, 1), membership1);
+
+        member2 = new Member(2, "Peter", "Roskilde", "87654321", "peter@gmail.com", LocalDate.of(2005, 1, 1), membership2);
+
+        fee1 = new MemberFee(member1);
+        fee2 = new MemberFee(member2);
     }
 
     @Test
-    void AddMemberFeeTest(){
+    void testAddMemberFee() {
+        administration.addMemberFee(fee1);
 
+        assertEquals(fee1.getAmount(), administration.expectedAnnualRevenue());
+    }
+
+    @Test
+    void testExpectedAnnualRevenue() {
+        administration.addMemberFee(fee1);
+        administration.addMemberFee(fee2);
+
+        assertEquals(fee1.getAmount() + fee2.getAmount(), administration.expectedAnnualRevenue());
+    }
+
+    @Test
+    void testShowMembersWithOutstandingPayment() {
+        administration.addMemberFee(fee1);
+        administration.addMemberFee(fee2);
+
+        fee1.memberHasPaid();
+
+        assertEquals(1, administration.showMembersWithOutstandingPayment().size());
+
+        assertTrue(administration.showMembersWithOutstandingPayment().contains(member2));
     }
 }
