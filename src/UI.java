@@ -228,7 +228,9 @@ public class UI {
 
         IO.println("Antal medlemmer i klubben: " + club.membersInTotal());
         IO.println();
-        club.printMembers();
+        for (Member member : club.getMembers()) {
+            IO.println(member);
+        }
     }
 
 

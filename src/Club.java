@@ -61,12 +61,6 @@ public class Club {
         return null;
     }
 
-    public void printMembers() {
-        for (Member member : members) {
-            IO.println(member);
-        }
-    }
-
     public void doesMemberIdAlreadyExist(int memberId) {
         if (findMemberByMemberId(memberId) != null) {
             throw new IllegalArgumentException();
