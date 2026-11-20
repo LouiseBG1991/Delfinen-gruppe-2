@@ -1,6 +1,4 @@
-
 public class MemberFee {
-//    private Member member;
     private MemberShip memberShip; // medlemsskab, som kontingentet knytter sig til
     private PaymentResult paymentResult; //betalingsstatus
     private double amount; // beløb

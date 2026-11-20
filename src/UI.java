@@ -19,7 +19,7 @@ public class UI {
 
         while (isRunning) {
             int choice = Integer.parseInt(IO.readln("Hvad er dit valg?"));
-
+            ShowMenu();
             switch (choice) {
                 case 0 -> isRunning = false;
                 case 1 -> ShowKassererMenu();
@@ -35,7 +35,6 @@ public class UI {
         IO.println("1. Kasserer");
         IO.println("2. Træner");
         IO.println("3. Formand");
-        IO.println("4. Medlem");
         IO.println("0. Afslut");
     }
 
