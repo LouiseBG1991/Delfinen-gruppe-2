@@ -9,6 +9,8 @@ public class ClubSaver {
     CsvMapper csvMapper = new CsvMapper();
 
     public void saveMembers(List<Member> members, String filename) throws IOException {
+        IO.println(members);
+        IO.println(filename);
         Path path = Path.of(filename);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             for (Member member : members) {

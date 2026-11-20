@@ -39,6 +39,7 @@ public class Club {
         }
     }
 
+
     public List<Member> getMembers() {
         return members;
     }
