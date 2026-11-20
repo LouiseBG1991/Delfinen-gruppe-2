@@ -1,5 +1,5 @@
 public enum Discipline {
-    CRAWL("CRAWL"),
+    CRAWL("Crawl"),
     BACKSTROKE("Rygcrawl"),
     BREASTSTROKE("Brystsvømning"),
     BUTTERFLY("Butterfly");

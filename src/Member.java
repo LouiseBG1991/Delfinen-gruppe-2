@@ -70,6 +70,7 @@ public class Member {
     public boolean isJunior() {return membership.isJunior(this.birthday);}
     public int getAge() {return membership.calculateAge(this.birthday);}
 
+
     @Override
     public String toString() {
         return String.format ("""
