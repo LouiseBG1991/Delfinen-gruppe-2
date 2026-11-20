@@ -15,6 +15,10 @@ public class Club {
         return administration.showMembersWithOutstandingPayment();
     }
 
+    public boolean registerPayment(int memberId) {
+        return administration.registerPayment(memberId);
+    }
+
     private Team juniorTeam = new Team("Juniorholdet", "Anders");
     private Team seniorTeam = new Team("Seniorholdet", "Mette");
 
@@ -55,12 +59,6 @@ public class Club {
             }
         }
         return null;
-    }
-
-    public void printMembers() {
-        for (Member member : members) {
-            IO.println(member);
-        }
     }
 
     public void doesMemberIdAlreadyExist(int memberId) {
