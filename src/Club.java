@@ -43,6 +43,14 @@ public class Club {
     }
 
 
+    public List<Member> getMembers() {
+        return members;
+    }
+
+        public Team getJuniorTeam () {
+            return juniorTeam;
+        }
+
     //Getters
 
     public List<Member> getMembers() {return members;}
