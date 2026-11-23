@@ -55,15 +55,13 @@ public class MemberShip {
         this.swimmerType = SwimmerType.NONE;
     }
 
-
-
-
-
     //Getters
     public MemberShipStatus getStatus() {return status;}
     public SwimmerType getSwimmerType() {return swimmerType;}
 
-
+    public boolean isActive() {
+        return this.status == MemberShipStatus.ACTIVE;
+    }
 
 
     // Aldersberegning
@@ -74,7 +72,7 @@ public class MemberShip {
     public boolean isJunior(LocalDate birthday) {
         return calculateAge(birthday) < 18;
     }
-    public Boolean isSenior(LocalDate birthday) {
+    public boolean isSenior(LocalDate birthday) {
         return !isJunior(birthday);
     }
 

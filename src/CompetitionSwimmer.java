@@ -4,6 +4,8 @@ import java.util.List;
 
 public class CompetitionSwimmer extends Member{
     List<SwimResult> swimResults = new ArrayList<>();
+    private List<Discipline> activeDisciplines = new ArrayList<>();
+
 
     public CompetitionSwimmer(int memberId, String name, String address, String phoneNumber, String email, LocalDate birthday) {
         //Her sendes et aktivt konkurrencemedlemskab med op til Member
@@ -26,5 +28,20 @@ public class CompetitionSwimmer extends Member{
             }
         }
         return best;
+    }
+
+
+    public void addDiscipline(Discipline discipline) {
+        if (discipline != null && activeDisciplines.contains(discipline)) {
+            activeDisciplines.add(discipline);
+        }
+    }
+
+    public void removeDiscipline(Discipline discipline) {
+        activeDisciplines.remove(discipline);
+    }
+
+    public List<Discipline> getActiveDisciplines() {
+        return new ArrayList<>(activeDisciplines);
     }
 }

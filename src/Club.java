@@ -1,8 +1,8 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Club {
-
     private List<Member> members = new ArrayList<>();
     private Administration administration = new Administration();
 
@@ -19,6 +19,7 @@ public class Club {
         return administration.registerPayment(memberId);
     }
 
+
     private Team juniorTeam = new Team("Juniorholdet", "Anders");
     private Team seniorTeam = new Team("Seniorholdet", "Mette");
 
@@ -31,7 +32,9 @@ public class Club {
     }
 
     public void addCompetitionSwimmer(CompetitionSwimmer swimmer) {
-        members.add(swimmer);
+        if (!members.contains(swimmer)) {
+            members.add(swimmer);
+        }
         if (swimmer.isJunior()) {
             juniorTeam.addSwimmer(swimmer);
         } else {
@@ -48,10 +51,11 @@ public class Club {
             return juniorTeam;
         }
 
+    //Getters
 
-    public Team getSeniorTeam() {
-        return seniorTeam;
-    }
+    public List<Member> getMembers() {return members;}
+    public Team getJuniorTeam () {return juniorTeam;}
+    public Team getSeniorTeam() {return seniorTeam;}
 
     public Member findMemberByMemberId(int memberId) {
         for (Member member : members) {
