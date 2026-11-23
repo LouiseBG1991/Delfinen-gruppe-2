@@ -19,6 +19,10 @@ public class Team {
         }
     }
 
+    public void removeSwimmer(CompetitionSwimmer swimmer) {
+        swimmers.remove(swimmer);
+    }
+
     // Getters
     public String getTeamName() {
         return teamName;
