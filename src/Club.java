@@ -5,6 +5,8 @@ import java.util.List;
 public class Club {
     private List<Member> members = new ArrayList<>();
     private Administration administration = new Administration();
+    private Team team = new Team();
+    private TrainerAdministration trainerAdministration = new TrainerAdministration(team);
 
 
     public double getExpectedAnnualRevenue() {
@@ -19,9 +21,7 @@ public class Club {
         return administration.registerPayment(memberId);
     }
 
-
-    private Team juniorTeam = new Team("Juniorholdet", "Anders");
-    private Team seniorTeam = new Team("Seniorholdet", "Mette");
+    // Metoder fra TrainerAdministration
 
     public void addMember(Member member) {
         doesMemberIdAlreadyExist(member.getMemberId());
@@ -29,33 +29,13 @@ public class Club {
 
         MemberFee memberfee = new MemberFee(member);
         administration.addMemberFee(memberfee);
+
+        team.addMemberToTeam(member);
     }
-
-    public void addCompetitionSwimmer(CompetitionSwimmer swimmer) {
-        if (!members.contains(swimmer)) {
-            members.add(swimmer);
-        }
-        if (swimmer.isJunior()) {
-            juniorTeam.addSwimmer(swimmer);
-        } else {
-            seniorTeam.addSwimmer(swimmer);
-        }
-    }
-
-
-    public List<Member> getMembers() {
-        return members;
-    }
-
-        public Team getJuniorTeam () {
-            return juniorTeam;
-        }
 
     //Getters
 
     public List<Member> getMembers() {return members;}
-    public Team getJuniorTeam () {return juniorTeam;}
-    public Team getSeniorTeam() {return seniorTeam;}
 
     public Member findMemberByMemberId(int memberId) {
         for (Member member : members) {

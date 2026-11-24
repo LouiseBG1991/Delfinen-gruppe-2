@@ -282,21 +282,21 @@ public class UI {
     }
 
 
-    private void printTop5(Team team, Discipline discipline) {
-        IO.println(("\n————— Top 5: " + team.getTeamName() + " (" + discipline + ") —————"));
-        List<CompetitionSwimmer> top5 = team.getTop5(discipline);
-
-        if (top5.isEmpty()) {
-            IO.println("Ingen registrerede tideri denne disciplin endnu.");
-        } else {
-            int rank = 1;
-            for (CompetitionSwimmer swimmer : top5) {
-                SwimResult best = swimmer.getBestResult(discipline);
-                IO.println(rank + ". " + swimmer.getName() + " - " + best);
-                rank++;
-            }
-        }
-    }
+//    private void printTop5(Team team, Discipline discipline) {
+//        IO.println(("\n————— Top 5: " + team.getTeamName() + " (" + discipline + ") —————"));
+//        List<CompetitionSwimmer> top5 = team.getTop5(discipline);
+//
+//        if (top5.isEmpty()) {
+//            IO.println("Ingen registrerede tideri denne disciplin endnu.");
+//        } else {
+//            int rank = 1;
+//            for (CompetitionSwimmer swimmer : top5) {
+//                SwimResult best = swimmer.getBestResult(discipline);
+//                IO.println(rank + ". " + swimmer.getName() + " - " + best);
+//                rank++;
+//            }
+//        }
+//    }
 }
 
 

@@ -2,48 +2,43 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+// Håndterer fordelingen af medlemmer på hold
 public class Team {
-    private String teamName; //f.eks. "Juniorholdet" eller "Seniorholdet"
-    private String coachName;
-    private ArrayList<CompetitionSwimmer> swimmers = new ArrayList<>();
 
+    private List<Member> juniors;
+    private List<Member> seniors;
 
-    public Team(String teamName, String coachName) {
-        this.teamName = teamName;
-        this.coachName = coachName;
+    public Team () {
+        this.juniors = new ArrayList<>();
+        this.seniors = new ArrayList<>();
+
     }
 
-    public void addSwimmer(CompetitionSwimmer swimmer) {
-        if (!swimmers.contains(swimmer)) {
-            swimmers.add(swimmer);
-        }
+    public List<Member> getJuniors() {
+        return juniors;
     }
 
-    public void removeSwimmer(CompetitionSwimmer swimmer) {
-        swimmers.remove(swimmer);
+    public List<Member> getSeniors() {
+        return seniors;
     }
 
-    // Getters
-    public String getTeamName() {
-        return teamName;
+    public void addMemberToTeam(Member member) {
+       if(!member.getMembership().isActive() || member.getMembership().getSwimmerType() != SwimmerType.COMPETITIVE) {
+           return;
+       }
+
+       if(member.isJunior()) {
+           juniors.add(member);
+       } else {
+           seniors.add(member);
+       }
+
     }
 
-    public String getCoachName() {
-        return coachName;
-    }
-
-    //Metode til rangliste top-5 hurtigste svømmere på holdet i en given disciplin
-    public List<CompetitionSwimmer> getTop5(Discipline discipline) {
-        List<CompetitionSwimmer> qualified = new ArrayList<>();
-
-        for (CompetitionSwimmer swimmer : swimmers) {
-            if (swimmer.getBestResult(discipline) != null) {
-                qualified.add(swimmer);
-            }
-        }
-        // Sorterer fra hurtigste (laveste finishTime) til langsomste
-        qualified.sort(Comparator.comparing(swimmer -> swimmer.getBestResult(discipline).getFinishTime()));
-
-        return qualified.subList(0, Math.min(5, qualified.size()));
+    public String toString() {
+        return String.format("""
+                Juniorteam: %s
+                Seniorteam: %s
+                """, juniors, seniors);
     }
 }
