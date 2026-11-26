@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Club {
@@ -35,7 +36,9 @@ public class Club {
 
     //Getters
 
-    public List<Member> getMembers() {return members;}
+    public List<Member> getMembers() {
+        return members;
+    }
 
     public Member findMemberByMemberId(int memberId) {
         for (Member member : members) {
@@ -60,4 +63,32 @@ public class Club {
         }
         return membersInTotal;
     }
+    // fields
+    private List<TrainingResult> trainingResults = new ArrayList<>();
+    private List<CompetitionResult> competitionResults = new ArrayList<>();
+
+    public void addTrainingResult(TrainingResult result) {
+        trainingResults.add(result);
+    }
+
+    public void addCompetitionResult(CompetitionResult result) {
+        competitionResults.add(result);
+    }
+
+    public List<TrainingResult> getTrainingResults() {
+        return trainingResults;
+    }
+
+    public List<CompetitionResult> getCompetitionResults() {
+        return competitionResults;
+    }
+
+    public List<TrainingResult> getTop5(Discipline discipline) {
+        return trainingResults.stream()
+                .filter(r -> r.getDiscipline() == discipline)
+                .sorted(Comparator.comparingDouble(TrainingResult::getFinishTime))
+                .limit(5)
+                .toList();
+    }
+
 }
