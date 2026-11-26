@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 
 public class MemberFee {
 //    private Member member;
@@ -5,12 +6,14 @@ public class MemberFee {
     private PaymentResult paymentResult; //betalingsstatus
     private double amount; // beløb
     private Member member;
+    private LocalDate dueDate; // Betalingsfrist
 
 
 
     public MemberFee(Member member) {
         this.memberShip = member.getMembership();
         this.paymentResult = PaymentResult.NOT_PAID; // kontingentet er ikke betalt, når medlemmet oprettes
+        this.dueDate = LocalDate.now().plusDays(8); // Sat frist til 8 dage fra oprettelse
         this.amount = calculateFeeByMemberShip(member);
         this.member = member;
     }
@@ -21,6 +24,14 @@ public class MemberFee {
 
     public Member getMember() {
         return member;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public boolean isOverDue() {
+        return this.paymentResult == PaymentResult.NOT_PAID && LocalDate.now().isAfter(this.dueDate);
     }
 
     public PaymentResult getPaymentResult() {
