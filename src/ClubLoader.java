@@ -6,90 +6,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClubLoader {
-//    private CsvMapper csvMapper = new CsvMapper();
-//
-//    public List<Member> loadMembers(Path path) throws IOException {
-//        List<Member> members = new ArrayList<>();
-//        try (BufferedReader reader = Files.newBufferedReader(path)){
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                Member member = csvMapper.memberFromCsv(line);
-//                members.add(member);
-//            }
-//        }
-//        return members;
-//    }
-//
-//    public List<CompetitionSwimmer> loadCompetitionSwimmers(Path path) throws IOException {
-//        List<CompetitionSwimmer> competitionSwimmers = new ArrayList<>();
-//        try (BufferedReader reader = Files.newBufferedReader(path)){
-//            String line;
-//            while ((line = reader.readLine()) !=null) {
-//                CompetitionSwimmer competitionSwimmer = csvMapper.competitionSwimmerFromCsv(line);
-//                competitionSwimmers.add(competitionSwimmer);
-//            }
-//        }
-//        return competitionSwimmers;
-//    }
-//
-//    public List<CompetitionResult> loadCompetitionResults(Path path) throws  IOException {
-//        List<CompetitionResult> competitionResults = new ArrayList<>();
-//        try (BufferedReader reader = Files.newBufferedReader(path)) {
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                CompetitionResult competitionResult = csvMapper.competitionResultFromCsv(line);
-//                competitionResults.add(competitionResult);
-//            }
-//        }
-//        return competitionResults;
-//    }
-//
-//    public List<Team> loadTeams(Path path) throws IOException {
-//        List<Team> teams = new ArrayList<>();
-//        try (BufferedReader reader = Files.newBufferedReader(path)){
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                Team team = csvMapper.teamFromCsv(line);
-//                teams.add(team);
-//            }
-//        }
-//        return teams;
-//    }
-//
-//    public List<CompititionResult> loadSwimResultPractices(Path path) throws IOException {
-//        List<CompititionResult> swimResultsPractice = new ArrayList<>();
-//        try (BufferedReader reader = Files.newBufferedReader(path)){
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                CompititionResult swimResult = csvMapper.swimResultPracticeFromCsv(line);
-//                swimResultsPractice.add(swimResult);
-//            }
-//        }
-//        return swimResultsPractice;
-//    }
-//
-//    public List<CompititionResult> loadSwimResultCompetition(Path path) throws IOException {
-//        List<CompititionResult> swimResultsCompetition = new ArrayList<>();
-//        try (BufferedReader reader = Files.newBufferedReader(path)){
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                CompititionResult swimResult = csvMapper.swimResultCompetitionFromCsv(line);
-//                swimResultsCompetition.add(swimResult);
-//            }
-//        }
-//        return swimResultsCompetition;
-//    }
-//
-//    public List<MemberShip> memberShips(Path path) throws IOException {
-//        List<MemberShip> memberShips = new ArrayList<>();
-//        try (BufferedReader reader = Files.newBufferedReader(path)) {
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                MemberShip memberShip = csvMapper.memberShipFromCsv(line);
-//                memberShips.add(memberShip);
-//            }
-//        }
-//        return memberShips;
-//    }
-}
+    private CsvMapper csvMapper;
 
+    public ClubLoader(CsvMapper csvMapper) {
+        this.csvMapper = csvMapper;
+    }
+
+    public List<Member> loadMembers(String filename) throws IOException {
+        List<Member> members = new ArrayList<>();
+        Path path = Path.of(filename);
+        try (BufferedReader reader = Files.newBufferedReader(path)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.isBlank()) continue;
+                Member member = csvMapper.memberFromCsv(line);
+                members.add(member);
+            }
+        }
+        return members; //færdig
+    }
+
+
+    public List<CompetitionResult> loadCompetitionResults(String filename) throws IOException {
+        List<CompetitionResult> competitionResults = new ArrayList<>();
+        Path path = Path.of(filename);
+        try (BufferedReader reader = Files.newBufferedReader(path)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.isBlank()) continue;
+                CompetitionResult competitionResult = csvMapper.competitionResultFromCsv(line);
+                competitionResults.add(competitionResult);
+            }
+        }
+        return competitionResults; // færdig
+    }
+
+
+    public List<TrainingResult> loadTrainingResults(String filename) throws IOException {
+        List<TrainingResult> trainingResults = new ArrayList<>();
+        Path path = Path.of(filename);
+        try (BufferedReader reader = Files.newBufferedReader(path)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.isBlank()) continue;
+                TrainingResult trainingResult = csvMapper.trainingResultsFromCsv(line);
+                trainingResults.add(trainingResult);
+            }
+        }
+        return trainingResults; // færdig
+    }
+
+
+    public List<MemberShip> loadMemberShips(String filename) throws IOException {
+        List<MemberShip> memberShips = new ArrayList<>();
+        Path path = Path.of(filename);
+        try (BufferedReader reader = Files.newBufferedReader(path)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                MemberShip memberShip = csvMapper.memberShipFromCsv(line);
+                memberShips.add(memberShip);
+            }
+        }
+        return memberShips; // færdig
+    }
+
+
+}

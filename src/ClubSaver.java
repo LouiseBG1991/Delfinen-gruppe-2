@@ -5,79 +5,51 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ClubSaver {
-//    private String delimiter = ",";
-//    CsvMapper csvMapper = new CsvMapper();
-//
-//    public void saveMembers(List<Member> members, String filename) throws IOException {
-//        IO.println(members);
-//        IO.println(filename);
-//        Path path = Path.of(filename);
-//        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-//            for (Member member : members) {
-//                writer.write(csvMapper.memberToCsv(member));
-//                writer.newLine();
-//            }
-//        }
-//    }
-//
-//        public void saveCompetitionSwimmers(List<CompetitionSwimmer> competitionSwimmers, String filename) throws IOException {
-//        Path path = Path.of(filename);
-//        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-//            for (CompetitionSwimmer competitionSwimmer : competitionSwimmers) {
-//                writer.write(csvMapper.competitionSwimmerToCsv(competitionSwimmer));
-//                writer.newLine();
-//            }
-//        }
-//    }
-//
-//    public void saveCompetitionResults(List<CompetitionResult> competitionResults, String filename) throws IOException {
-//        Path path = Path.of(filename);
-//        try (BufferedWriter writer = Files.newBufferedWriter(path)){
-//            for (CompetitionResult competitionResult : competitionResults) {
-//                writer.write(csvMapper.competitionResultsToCsv(competitionResult));
-//                writer.newLine();
-//            }
-//        }
-//    }
-//
-//    public void saveTeams(List<Team> teams, String filename) throws IOException{
-//        Path path = Path.of(filename);
-//        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-//            for (Team team : teams) {
-//                writer.write(csvMapper.teamToCsv(team));
-//                writer.newLine();
-//            }
-//        }
-//    }
-//
-//
-//    public void saveSwimResultsPractice(List<TrainingResult> trainingResults, String filename) throws IOException {
-//        Path path = Path.of(filename);
-//        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-//            for (TrainingResult trainingResult : trainingResults) {
-//                writer.write(csvMapper.swimResultPracticeToCsv(trainingResult));
-//                writer.newLine();
-//            }
-//        }
-//    }
-//    public void saveSwimResultsCompetition(List<CompititionResult> swimResults, String filename) throws IOException {
-//        Path path = Path.of(filename);
-//        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-//            for (CompititionResult swimResult : swimResults) {
-//                writer.write(csvMapper.swimResultCompetitionToCsv(swimResult));
-//                writer.newLine();
-//            }
-//        }
-//    }
-//
-//    public void saveMemberships(List<MemberShip> memberShips, String filename) throws  IOException {
-//        Path path = Path.of(filename);
-//        try (BufferedWriter writer = Files.newBufferedWriter(path)){
-//            for (MemberShip memberShip : memberShips) {
-//                writer.write(csvMapper.memberShipToCsv(memberShip));
-//                writer.newLine();
-//            }
-//        }
-//    }
+    private String delimiter = ",";
+    private CsvMapper csvMapper;
+
+    public ClubSaver(CsvMapper csvMapper) {
+        this.csvMapper = csvMapper;
+    }
+
+    public void saveMembers(List<Member> members, String filename) throws IOException { // færdig
+        Path path = Path.of(filename);
+        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+            for (Member member : members) {
+                writer.write(csvMapper.memberToCsv(member));
+                writer.newLine();
+            }
+        }
+    }
+
+    public void saveTrainingResults(List<TrainingResult> trainingResults, String filename) throws IOException { // færdig
+        Path path = Path.of(filename);
+        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+            for (TrainingResult trainingResult : trainingResults) {
+                writer.write(csvMapper.trainingResultsToCsv(trainingResult));
+                writer.newLine();
+            }
+        }
+    }
+
+    public void saveCompetitionResults(List<CompetitionResult> competitionResults, String filename) throws IOException { //færdig
+        Path path = Path.of(filename);
+        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+            for (CompetitionResult competitionResult : competitionResults) {
+                writer.write(csvMapper.competitionResultsToCsv(competitionResult));
+                writer.newLine();
+            }
+        }
+    }
+
+    public void saveMemberships(List<MemberShip> memberShips, String filename) throws IOException { //færdig
+        Path path = Path.of(filename);
+        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+            for (MemberShip memberShip : memberShips) {
+                writer.write(csvMapper.memberShipToCsv(memberShip));
+                writer.newLine();
+            }
+        }
+    }
 
 }

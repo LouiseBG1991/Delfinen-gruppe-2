@@ -3,15 +3,21 @@ public class MemberFee {
     private PaymentResult paymentResult; //betalingsstatus
     private double amount; // beløb
     private Member member;
+    private LocalDate dueDate; // Betalingsfrist
+    private int seasonYear; // sæsonår
 
 
 
+    // Bruges når et nyt kontingent oprettes i programmet (sætter frist på 8 dage fra i dag)
     public MemberFee(Member member) {
         this.memberShip = member.getMembership();
         this.paymentResult = PaymentResult.NOT_PAID; // kontingentet er ikke betalt, når medlemmet oprettes
         this.amount = calculateFeeByMemberShip(member);
         this.member = member;
+        this.dueDate = LocalDate.now().plusDays(8); // Sat frist til 8 dage fra oprettelse
+        this.seasonYear = LocalDate.now().getYear(); // Sætter det nuværende år automatisk
     }
+
 
     public MemberShip getMemberShip() {
         return memberShip;
@@ -19,6 +25,18 @@ public class MemberFee {
 
     public Member getMember() {
         return member;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public boolean isOverDue() {
+        return this.paymentResult == PaymentResult.NOT_PAID && LocalDate.now().isAfter(this.dueDate);
+    }
+
+    public int getSeasonYear() {
+        return seasonYear;
     }
 
     public PaymentResult getPaymentResult() {

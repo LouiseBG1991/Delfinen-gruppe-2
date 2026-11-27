@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UI {
@@ -208,20 +209,46 @@ public class UI {
         IO.println("--------Registrer nyt medlem---------");
         IO.println();
 
-        int memberId = readInt("Indtast medlemsnummer: ");
+       int memberId = -1;
 
-        try {
-            club.doesMemberIdAlreadyExist(memberId);
-        } catch (IllegalArgumentException e) {
-            IO.println("Medlemsnummeret findes allerede.");
-            return;
+        while (memberId == -1) {
+            try {
+                int memberIdAsk = Integer.parseInt(IO.readln("Indtast medlemsnummer: ").trim());
+
+                club.doesMemberIdAlreadyExist(memberIdAsk);
+                memberId = memberIdAsk;
+
+                } catch (NumberFormatException e) {
+                    IO.println("Indtast et gyldigt tal.");
+                } catch (IllegalArgumentException e) {
+                    IO.println("Medlemsnummeret findes allerede. Prøv igen");
+            }
         }
 
-        String name = IO.readln("Indtast navn: ").trim();
-        String address = IO.readln("Indtast adresse: ").trim();
-        String phoneNumber = IO.readln("Indtast telefonnummer: ").trim();
-        String email = IO.readln("Indtast email: ").trim();
-        LocalDate birthday = readDate("Indtast fødselsdato (yyyy-mm-dd): ");
+        String name = IO.readln("Indtast navn: ").trim(); // må ikke være tomt
+        String address = IO.readln("Indtast adresse: ").trim(); // må ikke være tomt
+        String phoneNumber = IO.readln("Indtast telefonnummer: ").trim(); //må ikke være bogstaver
+
+        String email = "";
+        while(email.isEmpty()) {
+
+            String emailAsk = IO.readln("Indtast email: ").trim(); // skal være et gyldigt format, f.eks. indeholde @
+            if (emailAsk.matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")) {
+                email = emailAsk;
+            } else {
+                IO.println("Ugyldig email. Prøv igen med f.eks. navn@mail.dk");
+            }
+
+        }
+        LocalDate birthday = null;
+
+        while (birthday == null) {
+        try {
+            birthday = LocalDate.parse(IO.readln("Indtast fødselsdato (yyyy-mm-dd): ").trim());
+        } catch (DateTimeParseException e) {
+            IO.println("Ugyldig dato. Brug formatet yyyy-mm-dd");
+        }
+        }
 
         MemberShip memberShip = chooseMemberShip();
 
