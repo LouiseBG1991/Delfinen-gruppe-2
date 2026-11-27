@@ -12,6 +12,7 @@ public class Member {
     private LocalDate birthday;
     private MemberShip membership;
     private List<Discipline> disciplines = new ArrayList<>();
+    private List<MemberShip> memberShips = new ArrayList<>(); // Liste til flere sæsoner
 
     public Member(int memberId, String name, String address, String phoneNumber, String email, LocalDate birthday, MemberShip memberShip) {
         this.memberId = memberId;
@@ -75,6 +76,19 @@ public class Member {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<MemberShip> getMemberShips() {
+        return memberShips;
+    }
+
+    public MemberShip getCurrentMemberShip() {
+        for (MemberShip m : memberShips) {
+            if (m.getSeasonYear() == LocalDate.now().getYear()) {
+                return m;
+            }
+        }
+        return null;
     }
 
     public boolean isJunior() {return membership.isJunior(this.birthday);}

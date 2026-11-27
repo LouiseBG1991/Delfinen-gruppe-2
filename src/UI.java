@@ -347,6 +347,27 @@ public class UI {
         return memberShip;
     }
 
+    private void printMemberShipHistory(Member member) {
+        if (member == null) {
+            IO.println("Medlemmet blev ikke fundet.");
+            return;
+        }
+
+        if (member.getMemberShips().isEmpty()) {
+            IO.println("Ingen medlemskabshistorik registreret.");
+            return;
+        }
+
+        for (MemberShip ms : member.getMemberShips()) {
+            String statusText = switch (ms.getStatus()) {
+                case ACTIVE -> "Aktiv";
+                case PASSIVE -> "Passiv";
+                default -> "Ukendt";
+            };
+            IO.println("Medlemmet var " + statusText + " i " + ms.getSeasonYear());
+        }
+    }
+
     private void chooseSwimmerType(MemberShip memberShip) {
         while (memberShip.getSwimmerType() == SwimmerType.NONE) {
             IO.println("""

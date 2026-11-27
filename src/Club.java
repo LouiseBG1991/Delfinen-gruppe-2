@@ -60,6 +60,16 @@ public class Club {
         }
         return membersInTotal;
     }
+
+    public MemberShip getCurrentMemberShip(int memberId) {
+        Member member = findMemberByMemberId(memberId);
+        if (member != null) {
+            return member.getCurrentMemberShip();
+        } else {
+            return null;
+        }
+    }
+
     // fields
     private List<TrainingResult> trainingResults = new ArrayList<>();
     private List<CompetitionResult> competitionResults = new ArrayList<>();
