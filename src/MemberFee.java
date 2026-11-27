@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class MemberFee {
     private MemberShip memberShip; // medlemsskab, som kontingentet knytter sig til
     private PaymentResult paymentResult; //betalingsstatus
