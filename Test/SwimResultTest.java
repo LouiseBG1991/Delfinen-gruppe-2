@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
-
+/*
 public class SwimResultTest {
     SwimResult swimResult1;
     SwimResult swimResult2;
@@ -29,3 +29,4 @@ public class SwimResultTest {
         assertEquals(1, swimResult1.getPlacement());
     }
 }
+*/

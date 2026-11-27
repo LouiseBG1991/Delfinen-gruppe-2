@@ -60,6 +60,7 @@ public class Club {
         }
         return membersInTotal;
     }
+
     // fields
     private List<TrainingResult> trainingResults = new ArrayList<>();
     private List<CompetitionResult> competitionResults = new ArrayList<>();
@@ -88,4 +89,28 @@ public class Club {
                 .toList();
     }
 
+    public List<CompetitionResult> getTop5CompetetionsForMember(int memberId) {
+        var foundMember = findMemberByMemberId(memberId);
+        if (memberId != 0) {
+            return competitionResults.stream()
+                    .filter(i -> i.getMember() == foundMember)
+                    .sorted(Comparator.comparingDouble(CompetitionResult::getFinishTime))
+                    .limit(5)
+                    .toList();
+
+        }
+        return null;
+    }
+
+    public List<TrainingResult> getTop5TrainingResultForMember(int memberId) {
+        var foundMember = findMemberByMemberId(memberId);
+        if (memberId != 0) {
+            return trainingResults.stream()
+                    .filter(i -> i.getMember() == foundMember)
+                    .sorted(Comparator.comparingDouble(TrainingResult::getFinishTime))
+                    .limit(5)
+                    .toList();
+        }
+        return null;
+    }
 }

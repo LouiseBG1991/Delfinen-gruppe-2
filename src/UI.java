@@ -56,6 +56,7 @@ public class UI {
                 case 1 -> ShowKassererMenu();
                 case 2 -> ShowTrainerMenu();
                 case 3 -> ShowChairmanMenu();
+                case 4 -> showMemberMenu();
                 default -> IO.println("Ugyldigt valg.");
             }
         }
@@ -67,6 +68,7 @@ public class UI {
         IO.println("1. Kasserer");
         IO.println("2. Træner");
         IO.println("3. Formand");
+        IO.println("4. Medlem");
         IO.println("0. Afslut");
     }
 
@@ -98,6 +100,41 @@ public class UI {
         }
     }
 
+    public void showMemberMenu() {
+        boolean memberIsRunning = true;
+        while (memberIsRunning) {
+            IO.println();
+            IO.println("1. Top 5 i disciplin");
+            IO.println("2. Træningsresultater");
+            IO.println("0. Tilbage");
+
+            int memberChoice = readInt("Vælg en mulighed: ");
+
+            switch (memberChoice) {
+                case 1 -> showTrainingResultsForMember();
+                case 2 -> showCompetitionResultsForMember();
+                case 3 -> showDisciplines();
+                case 0 -> memberIsRunning = false;
+                default -> IO.println("Ugyldigt valg.");
+            }
+        }
+    }
+
+    public void showTrainingResultsForMember(){
+        var temp = club.getTop5TrainingResultForMember(Integer.parseInt(IO.readln("Hvad er dit medlemsid: ")));
+        IO.println("-------------------TOP 5 BEDSTE TRÆNINGSRESULTATER----------------");
+        for (int i = 0; i < temp.size(); i++) {
+            IO.println(temp.get(i));
+        }
+    }
+
+    public void showCompetitionResultsForMember(){
+        var temp = club.getTop5CompetetionsForMember(Integer.parseInt(IO.readln("Hvad er dit medlemsid: ")));
+        IO.println("-------------------TOP 5 BEDSTE STÆVNERESULTATER----------------");
+        for (int i = 0; i < temp.size(); i++) {
+            IO.println(temp.get(i));
+        }
+    }
     public void createSwimResult() {
         IO.println();
         IO.println("---------Tilføj svømmeresultat---------");
