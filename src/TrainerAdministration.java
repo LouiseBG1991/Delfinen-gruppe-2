@@ -22,7 +22,15 @@ public class TrainerAdministration {
         competitionResults.add(result);
     }
 
-    public List<TrainingResult> getBestResultInEachDiscipline(List<Member> competitionSvimmers) {
+    public List<TrainingResult> getTrainingResults() {
+        return trainingResults;
+    }
+
+    public List<CompetitionResult> getCompetitionResults() {
+        return competitionResults;
+    }
+
+    public List<TrainingResult> getBestResultInEachDiscipline(List<Member> competitionSwimmers) {
         List<TrainingResult> bestResults = new ArrayList<>();
 
         List<Discipline> disciplines = List.of(
@@ -37,7 +45,7 @@ public class TrainerAdministration {
             TrainingResult bestResult = null;
 
             for (TrainingResult result : trainingResults) {
-                if (competitionSvimmers.contains(result.getMember()) && result.getDiscipline() == discipline) {
+                if (competitionSwimmers.contains(result.getMember()) && result.getDiscipline() == discipline) {
                     if (bestResult == null || result.getFinishTime() < bestResult.getFinishTime()) {
                         bestResult = result;
                     }

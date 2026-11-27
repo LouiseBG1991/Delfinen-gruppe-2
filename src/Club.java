@@ -21,8 +21,6 @@ public class Club {
         return administration.registerPayment(memberId);
     }
 
-    // Metoder fra TrainerAdministration
-
     public void addMember(Member member) {
         doesMemberIdAlreadyExist(member.getMemberId());
         members.add(member);
@@ -33,7 +31,21 @@ public class Club {
         team.addMemberToTeam(member);
     }
 
-    //Getters
+    public List<TrainingResult> getTrainingResults() {
+        return trainerAdministration.getTrainingResults();
+    }
+
+    public List<CompetitionResult> getCompetitionResults() {
+        return trainerAdministration.getCompetitionResults();
+    }
+
+    public void addTrainingResults(TrainingResult result) {
+        trainerAdministration.addTrainingResults(result);
+    }
+
+    public void addCompetitionResults(CompetitionResult result) {
+        trainerAdministration.addCompetitionResults(result);
+    }
 
     public List<Member> getMembers() {return members;}
 
