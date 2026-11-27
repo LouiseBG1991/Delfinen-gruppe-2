@@ -1,50 +1,46 @@
 import java.time.LocalDate;
 
 public class CompetitionResult {
-    int memberId;
-    String place;
-    String convention;
-    LocalDate time;
-    LocalDate finishTime;
-    int placement;
-    String discipline;
+    private Member member;
+    private Discipline discipline;
+    private double finishTime; //Omdøbt fra timeInSeconds
+    private LocalDate date;
+    private String competitionName;
+    private int placement;
+    private String place;
 
-    public CompetitionResult(int memberId,String place, String convention, LocalDate time, LocalDate finishTime, int placement, String discipline){
-        this.memberId = memberId;
-        this.place = place;
-        this.convention = convention;
-        this.time = time;
-        this.finishTime = finishTime;
-        this.placement = placement;
+
+    public CompetitionResult(Member member, Discipline discipline, double finishTime, LocalDate date, String competitionName, int placement, String place) {
+        this.member = member;
         this.discipline = discipline;
+        this.finishTime = finishTime;
+        this.date = date;
+        this.competitionName = competitionName;
+        this.placement = placement;
+        this.place = place;
     }
 
-    public CompetitionResult addCompetitionResult(int memberId,String place, String convention, LocalDate time, LocalDate finishTime, int placement, String discipline){
-        CompetitionResult competitionResult = new CompetitionResult(memberId, place, convention, time, finishTime, placement, discipline);
-        return competitionResult;
-    }
+    //Getters
+    public Member getMember() {return  member;}
+    public Discipline getDiscipline() {return discipline;}
+    public double getFinishTime() {return finishTime;}
+    public LocalDate getDate() {return date;}
+    public String getCompetitionName() {return competitionName;}
+    public int getPlacement() {return placement;}
+    public String getPlace() {return place;}
 
-    public int getMemberId() {
-        return memberId;
-    }
 
-    public String getPlace() {
-        return place;
-    }
-    public String getConvention() {
-        return convention;
-    }
-    public LocalDate getTime() {
-        return time;
-    }
-    public LocalDate getFinishTime() {
-    return finishTime;
-    }
-
-    public int getPlacement() {
-        return placement;
-    }
-    public String getDiscipline() {
-        return discipline;
+    @Override
+    public String toString() {
+            return String.format("""
+                    Navn: %s
+                    Medlemsnummer: %s
+                    Disciplin: %s
+                    Tid: %.2f sek.
+                    Dato: %s
+                    Stævne: %s 
+                    Placering: %d
+                    Sted: %s""",
+                    member.getName(), member.getMemberId(), discipline, finishTime, date, competitionName, placement, place);
     }
 }

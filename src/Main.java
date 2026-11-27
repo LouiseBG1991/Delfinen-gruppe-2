@@ -37,10 +37,10 @@ void main(String[] args) {
     } catch (IOException e) {
         IO.println("Could not find CompetitionResults.csv");
     }
-    List<SwimResult> swimResultsCompetition = null;
+    List<CompititionResult> swimResultsCompetition = null;
     try {
         swimResultsCompetition = loader.loadSwimResultCompetition(path.resolve("SwimResultsCompetition.csv"));
-        for (SwimResult swimResult : swimResultsCompetition) {
+        for (CompititionResult swimResult : swimResultsCompetition) {
             //kan ikke tilføje swimresult til medlem fordi swimresult ikke gemmer et medlem
             //tilføj addmetode til competetionswimmer
         }
@@ -49,10 +49,10 @@ void main(String[] args) {
         IO.println("Could not find SwimResultsCompetiton.csv");
     }
 
-    List<SwimResult> swimResultsPractice = null;
+    List<CompititionResult> swimResultsPractice = null;
     try {
         swimResultsPractice = loader.loadSwimResultPractices(path.resolve("SwimResultsPractice.csv"));
-        for (SwimResult swimResultPractice : swimResultsPractice) {
+        for (CompititionResult swimResultPractice : swimResultsPractice) {
             //Hvad skal tilføjes?
         }
         swimResultsPractice.sort(null);

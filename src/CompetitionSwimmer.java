@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompetitionSwimmer extends Member{
-    List<SwimResult> swimResults = new ArrayList<>();
+    List<CompititionResult> swimResults = new ArrayList<>();
     private List<Discipline> activeDisciplines = new ArrayList<>();
 
 
@@ -13,14 +13,14 @@ public class CompetitionSwimmer extends Member{
     }
 
 
-    public void addSwimResults (SwimResult swimResult){swimResults.add(swimResult);}
-    public List<SwimResult> getSwimResults() {return swimResults;}
+    public void addSwimResults (CompititionResult swimResult){swimResults.add(swimResult);}
+    public List<CompititionResult> getSwimResults() {return swimResults;}
 
     //Metoden returnerer den hurtigste tidsrekord i givent disciplin
 
-    public SwimResult getBestResult(Discipline discipline) {
-        SwimResult best = null;
-        for (SwimResult result : swimResults) {
+    public CompititionResult getBestResult(Discipline discipline) {
+        CompititionResult best = null;
+        for (CompititionResult result : swimResults) {
             if (result.getDiscipline() == discipline) {
                 if (best == null || result.getFinishTime() < best.getFinishTime()) {
                     best = result;

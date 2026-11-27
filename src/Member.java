@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Member {
 
@@ -9,6 +11,7 @@ public class Member {
     private String email;
     private LocalDate birthday;
     private MemberShip membership;
+    private List<Discipline> disciplines = new ArrayList<>();
 
     public Member(int memberId, String name, String address, String phoneNumber, String email, LocalDate birthday, MemberShip memberShip) {
         this.memberId = memberId;
@@ -22,6 +25,13 @@ public class Member {
     }
 
     //Getters og setters
+
+    public void addDiscipline(Discipline discipline) {
+        if(!disciplines.contains(discipline)) {
+            disciplines.add(discipline);
+        }
+
+    }
 
     public int getMemberId() {
         return memberId;
