@@ -25,7 +25,7 @@ void main(String[] args) {
         trainingResults = clubLoader.loadTrainingResults("trainingresults.csv");
         trainingResults.sort(null);
         for (TrainingResult trainingResult : trainingResults) {
-            club.addTrainingResults(trainingResult);
+            club.addTrainingResult(trainingResult);
         }
     } catch (IOException e) {
         IO.println("Kunne ikke finde trainingResults.csv");
@@ -35,7 +35,7 @@ void main(String[] args) {
         competitionResults = clubLoader.loadCompetitionResults("competitionresults.csv");
         competitionResults.sort(null);
         for (CompetitionResult competitionResult : competitionResults) {
-            club.addCompetitionResults(competitionResult);
+            club.addCompetitionResult(competitionResult);
         }
     } catch (IOException e) {
         IO.println("Kunne ikke finde competitionResults.csv");
