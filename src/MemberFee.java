@@ -6,7 +6,6 @@ public class MemberFee {
     private double amount; // beløb
     private Member member;
     private LocalDate dueDate; // Betalingsfrist
-    private int seasonYear; // sæsonår
 
 
 
@@ -17,7 +16,6 @@ public class MemberFee {
         this.amount = calculateFeeByMemberShip(member);
         this.member = member;
         this.dueDate = LocalDate.now().plusDays(8); // Sat frist til 8 dage fra oprettelse
-        this.seasonYear = LocalDate.now().getYear(); // Sætter det nuværende år automatisk
     }
 
 
@@ -37,9 +35,6 @@ public class MemberFee {
         return this.paymentResult == PaymentResult.NOT_PAID && LocalDate.now().isAfter(this.dueDate);
     }
 
-    public int getSeasonYear() {
-        return seasonYear;
-    }
 
     public PaymentResult getPaymentResult() {
         return paymentResult;

@@ -2,12 +2,14 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class MemberShip {
+    private int seasonYear;
     private MemberShipStatus status;
     private SwimmerType swimmerType;
 
 
     //Opretter et medlemskab uden valgt status endnu (NONE)
     public MemberShip(){
+        this.seasonYear = LocalDate.now().getYear();
         this.status = MemberShipStatus.NONE;
         this.swimmerType = SwimmerType.NONE;
     }
@@ -28,6 +30,10 @@ public class MemberShip {
         if (status != MemberShipStatus.ACTIVE) {
             this.swimmerType = SwimmerType.NONE;
         }
+    }
+
+    public int getSeasonYear() {
+        return seasonYear;
     }
 
     public void setSwimmerType(SwimmerType swimmerType) {
